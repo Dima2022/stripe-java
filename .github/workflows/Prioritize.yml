@@ -5,34 +5,16 @@ name: Whitesource Prioritize Java with Gradle
 on: workflow_dispatch
 
 jobs:
-  spotless:
-    name: Spotless
-
+  build:
     runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@master
-
-      - name: Spotless
-        run: ./gradlew spotlessCheck
-
-  tests:
-    name: Tests
-
-    runs-on: ubuntu-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        java-version:
-          - "1.8"
+    
     steps:
       - uses: actions/checkout@master
 
       - name: Setup Java
         uses: actions/setup-java@v1
         with:
-          java-version: ${{ matrix.java-version }}
+          java-version: '1.8'
           architecture: x64
 
       - name: Tweak gradle.properties for Java 1.8
